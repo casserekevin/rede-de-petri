@@ -2,17 +2,27 @@ package rededepetri.components;
 
 import java.io.InvalidClassException;
 
-import rededepetri.interfaces.Conectaveis;
+import rededepetri.interfaces.Conectavel;
 
 public class Arco {
-	private Conectaveis entrada;
-	private Conectaveis saida;
+	private Conectavel entrada;
+	private Conectavel saida;
+	
+	private int peso;
 
-	public Arco(Conectaveis c1, Conectaveis c2) throws InvalidClassException {
+	public Arco(int peso) {
+		this.peso = peso;
+	}
+	
+	public Arco() throws InvalidClassException {
+		this(1);
+	}
+	
+	public void conectar(Conectavel c1, Conectavel c2) throws InvalidClassException {
 		boolean isOk = false;
 		
-		Conectaveis con1 = null;
-		Conectaveis con2 = null;
+		Conectavel con1 = null;
+		Conectavel con2 = null;
 		
 		try {
 			Lugar lugar = (Lugar) c1;
@@ -44,8 +54,20 @@ public class Arco {
 			
 			this.entrada = con1;
 			this.saida = con2;
-		}			
-			
-			
+		}				
 	}
+
+	public Conectavel getEntrada() {
+		return entrada;
+	}
+
+	public Conectavel getSaida() {
+		return saida;
+	}
+
+	public int getPeso() {
+		return peso;
+	}
+	
+	
 }

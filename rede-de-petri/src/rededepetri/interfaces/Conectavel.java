@@ -2,7 +2,7 @@ package rededepetri.interfaces;
 
 import rededepetri.components.Arco;
 
-public interface Conectaveis {
+public interface Conectavel {
 	
 	public void conectarEntrada(Arco arco);
 	
