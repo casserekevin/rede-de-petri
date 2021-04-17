@@ -8,17 +8,19 @@ public class Arco {
 	private Conectavel entrada;
 	private Conectavel saida;
 	
+	private String nome;
 	private int peso;
 
-	public Arco(int peso) {
+	public Arco(String nome, int peso) {
+		this.nome = nome;
 		this.peso = peso;
 	}
 	
-	public Arco() throws InvalidClassException {
-		this(1);
+	public Arco(String nome) {
+		this(nome, 1);
 	}
 	
-	public void conectar(Conectavel c1, Conectavel c2) throws InvalidClassException {
+	public Arco conectar(Conectavel c1, Conectavel c2) throws InvalidClassException {
 		boolean isOk = false;
 		
 		Conectavel con1 = null;
@@ -54,7 +56,10 @@ public class Arco {
 			
 			this.entrada = con1;
 			this.saida = con2;
-		}				
+			
+			return this;
+		}
+		return null;				
 	}
 
 	public Conectavel getEntrada() {

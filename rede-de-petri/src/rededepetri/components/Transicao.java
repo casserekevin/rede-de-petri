@@ -3,18 +3,21 @@ package rededepetri.components;
 import java.util.ArrayList;
 
 import rededepetri.interfaces.Conectavel;
+import rededepetri.validators.PriorityValidator;
 
 public class Transicao implements Conectavel{
 	
-	private String nome;
 	
 	private ArrayList<Arco> arcos_de_entrada = new ArrayList<>();
 	private ArrayList<Arco> arcos_de_saida = new ArrayList<>();;
 	
+	private String nome;
 	private boolean ativa;
+	private int prioridade;
 	
-	public Transicao(String nome) {
+	public Transicao(String nome, int prioridade) {
 		this.nome = nome;
+		this.prioridade = PriorityValidator.validate(prioridade);
 		this.ativa = false;
 	}
 
@@ -22,13 +25,22 @@ public class Transicao implements Conectavel{
 		return nome;
 	}
 
+	public boolean isAtiva() {
+		return ativa;
+	}
+	
+	public int getPrioridade() {
+		return prioridade;
+	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
-	public boolean isAtiva() {
-		return ativa;
+	public void setAtiva(boolean ativa) {
+		this.ativa = ativa;
 	}
+	
 
 	public boolean verificaAtivacao() {
 		int contador_de_validos = 0;
@@ -42,11 +54,9 @@ public class Transicao implements Conectavel{
 		}
 		
 		if(contador_de_validos == this.arcos_de_entrada.size()) {
-			this.ativa = true;
 			return true;
 		}
 		else {
-			this.ativa = false;
 			return false;
 		}
 		
