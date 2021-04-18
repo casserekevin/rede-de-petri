@@ -3,22 +3,45 @@ package rededepetri.components;
 import java.util.ArrayList;
 
 import rededepetri.interfaces.Conectavel;
+import rededepetri.validators.IdValidator;
 
 public class Lugar implements Conectavel{
 	
+	private int id;
 	private String nome;
 	private int numero_de_marcas;
 	
 	private ArrayList<Arco> arcos_de_entrada = new ArrayList<>();
 	private ArrayList<Arco> arcos_de_saida = new ArrayList<>();
 
-	public Lugar(String nome, int numero_de_marcas) {
+	public Lugar(int id, String nome, int numero_de_marcas) {
+		this.id = IdValidator.validate(id);
 		this.setNome(nome);
 		this.setNumeroDeMarcas(numero_de_marcas);
 	}
 	
-	public Lugar(String nome) {
-		this(nome, 0);
+	public Lugar(int id, String nome) {
+		this(id, nome, 0);
+	}
+	
+	public Lugar() {
+		
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = IdValidator.validate(id);
+	}
+
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 	public int getNumeroDeMarcas() {
@@ -29,14 +52,6 @@ public class Lugar implements Conectavel{
 		this.numero_de_marcas = numero_de_marcas;
 	}
 	
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public void adicionaUmaMarca() {
 		this.numero_de_marcas++;
 	}

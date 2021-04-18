@@ -7,36 +7,29 @@ import java.util.Collections;
 import rededepetri.components.Arco;
 import rededepetri.components.Lugar;
 import rededepetri.components.Transicao;
+import rededepetri.reader.PNMLReader;
 import rededepetri.sorters.PrioritySorter;
 
 public class RedeDePetri {
 	
 	private ArrayList<Transicao> transicoes = new ArrayList<>();
 	
-	public RedeDePetri() throws InvalidClassException {
+	public RedeDePetri(String filename) throws InvalidClassException {
 		
-		Lugar l1 = new Lugar("L1", 2);
-		Lugar l2 = new Lugar("L2", 0);
-		Lugar l3 = new Lugar("L2", 0);
-
-		Transicao t1 = new Transicao("T1", 1);
-		Transicao t2 = new Transicao("T2", 2);
+		PNMLReader reader = new PNMLReader();
+		ArrayList<Object> rede = reader.read(filename);
 		
+		transicoes = (ArrayList<Transicao>) rede.get(1);
+		System.out.println("rede criada");
 		
-		Arco a1 = new Arco("a1").conectar(l1, t1);
-		Arco a2 = new Arco("a2", 2).conectar(l1, t2);
-		
-		Arco a3 = new Arco("a3").conectar(t1, l2);
-		Arco a4 = new Arco("a4").conectar(t2, l3);
-		
-		this.transicoes.add(t1);
-		this.transicoes.add(t2);
 	}
 
 	public void run() {
+		System.out.println("Executando...");
 		while (hasActiveTransitions()) {
 			ciclo();			
 		}
+		System.out.println("Executou...");
 	}
 	
 	private void ciclo() {

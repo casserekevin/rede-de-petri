@@ -3,23 +3,54 @@ package rededepetri.components;
 import java.io.InvalidClassException;
 
 import rededepetri.interfaces.Conectavel;
+import rededepetri.validators.IdValidator;
 
 public class Arco {
 	private Conectavel entrada;
 	private Conectavel saida;
 	
+	private int id;
 	private String nome;
 	private int peso;
 
-	public Arco(String nome, int peso) {
+	public Arco(int id, String nome, int peso) {
+		this.id = IdValidator.validate(id);
 		this.nome = nome;
 		this.peso = peso;
 	}
 	
-	public Arco(String nome) {
-		this(nome, 1);
+	public Arco(int id, String nome) {
+		this(id, nome, 1);
 	}
 	
+	public Arco() {
+		
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = IdValidator.validate(id);
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public int getPeso() {
+		return peso;
+	}
+
+	public void setPeso(int peso) {
+		this.peso = peso;
+	}
+
 	public Arco conectar(Conectavel c1, Conectavel c2) throws InvalidClassException {
 		boolean isOk = false;
 		
@@ -68,11 +99,5 @@ public class Arco {
 
 	public Conectavel getSaida() {
 		return saida;
-	}
-
-	public int getPeso() {
-		return peso;
-	}
-	
-	
+	}	
 }
