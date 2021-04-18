@@ -24,12 +24,16 @@ public class RedeDePetri {
 		
 	}
 
-	public void run() {
-		System.out.println("Executando...");
-		while (hasActiveTransitions()) {
+	public boolean run() {
+		if (hasActiveTransitions()) {
+			System.out.println("Executando...");
 			ciclo();			
+			System.out.println("Executou...");
+			
+			return true;
 		}
-		System.out.println("Executou...");
+		
+		return false;
 	}
 	
 	private void ciclo() {
