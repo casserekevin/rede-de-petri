@@ -3,6 +3,7 @@ package rededepetri.components;
 import java.util.ArrayList;
 
 import rededepetri.interfaces.Conectavel;
+import rededepetri.validators.NameValidator;
 import rededepetri.validators.PriorityValidator;
 
 public class Transicao implements Conectavel{
@@ -18,7 +19,7 @@ public class Transicao implements Conectavel{
 	
 	public Transicao(int id, String nome, int prioridade) {
 		this.id = id;
-		this.nome = nome;
+		this.nome = NameValidator.validate(nome);
 		this.prioridade = PriorityValidator.validate(prioridade);
 		this.ativa = false;
 	}
@@ -40,7 +41,7 @@ public class Transicao implements Conectavel{
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = NameValidator.validate(nome);
 	}
 	
 	public int getPrioridade() {
@@ -57,6 +58,14 @@ public class Transicao implements Conectavel{
 	
 	public void setAtiva(boolean ativa) {
 		this.ativa = ativa;
+	}
+	
+	public String getAtivaToString() {
+		if(ativa) {
+			return "S";
+		}
+		
+		return "N";
 	}
 
 	public boolean verificaAtivacao() {

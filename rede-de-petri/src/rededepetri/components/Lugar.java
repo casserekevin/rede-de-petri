@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import rededepetri.interfaces.Conectavel;
 import rededepetri.validators.IdValidator;
+import rededepetri.validators.NameValidator;
 
 public class Lugar implements Conectavel{
 	
@@ -16,7 +17,7 @@ public class Lugar implements Conectavel{
 
 	public Lugar(int id, String nome, int numero_de_marcas) {
 		this.id = IdValidator.validate(id);
-		this.setNome(nome);
+		this.nome = NameValidator.validate(nome);
 		this.setNumeroDeMarcas(numero_de_marcas);
 	}
 	
@@ -41,7 +42,7 @@ public class Lugar implements Conectavel{
 	}
 	
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = NameValidator.validate(nome);
 	}
 	
 	public int getNumeroDeMarcas() {
