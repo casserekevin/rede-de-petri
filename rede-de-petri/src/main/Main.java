@@ -15,7 +15,7 @@ public class Main {
 	public static void main(String[] args) throws InvalidClassException {
 
 		System.out.println("Iniciando...");
-		RedeDePetri rede = new RedeDePetri("inicializacao.pnml");
+		RedeDePetri rede = new RedeDePetri("redeGA.pnml");
 		
 		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 		logger.setLevel(Level.SEVERE);

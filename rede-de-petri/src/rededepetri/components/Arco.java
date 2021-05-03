@@ -2,11 +2,10 @@ package rededepetri.components;
 
 import java.io.InvalidClassException;
 
-import org.omg.CORBA.NamedValue;
-
 import rededepetri.interfaces.Conectavel;
 import rededepetri.validators.IdValidator;
 import rededepetri.validators.NameValidator;
+import rededepetri.validators.TypeValidator;
 
 public class Arco {
 	private Conectavel entrada;
@@ -15,15 +14,17 @@ public class Arco {
 	private int id;
 	private String nome;
 	private int peso;
+	private String tipo;
 
-	public Arco(int id, String nome, int peso) {
+	public Arco(int id, String nome, int peso, String tipo) {
 		this.id = IdValidator.validate(id);
 		this.nome = NameValidator.validate(nome);
 		this.peso = peso;
+		this.tipo = TypeValidator.validate(tipo);
 	}
 	
 	public Arco(int id, String nome) {
-		this(id, nome, 1);
+		this(id, nome, 1, "normal");
 	}
 	
 	public Arco() {
@@ -52,6 +53,26 @@ public class Arco {
 
 	public void setPeso(int peso) {
 		this.peso = peso;
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+	
+	public void setTipo(String tipo) {
+		this.tipo = TypeValidator.validate(tipo);
+	}
+	
+	public boolean isNormal() {
+		return tipo.equals("normal");
+	}
+	
+	public boolean isReset() {
+		return tipo.equals("reset");
+	}
+	
+	public boolean isInhibitor() {
+		return tipo.equals("inhibitor");
 	}
 
 	public Arco conectar(Conectavel c1, Conectavel c2) throws InvalidClassException {

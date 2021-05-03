@@ -2,9 +2,7 @@ package rededepetri;
 
 import java.io.InvalidClassException;
 import java.util.ArrayList;
-import java.util.Collections;
 
-import rededepetri.components.Arco;
 import rededepetri.components.Lugar;
 import rededepetri.components.Transicao;
 import rededepetri.reader.PNMLReader;
@@ -107,7 +105,12 @@ public class RedeDePetri {
 	private void appendCabecalho() {
 		String cabecalho = "| Número do ciclo ";
 		for (Lugar lugar : lugares) {
-			cabecalho = cabecalho + "| " + lugar.getNome() + " ";
+			if(lugar.getNome().length() >= 3) {
+				cabecalho = cabecalho + "|" + lugar.getNome() + " ";								
+			}
+			else {
+				cabecalho = cabecalho + "| " + lugar.getNome() + " ";				
+			}
 		}
 		int index = 0;
 		for (Transicao transicao : transicoes) {
@@ -130,12 +133,20 @@ public class RedeDePetri {
 		if(ciclo == 0) {
 			dados = dados + "|      " + ciclo + " (Início) ";			
 		}
+		else if(ciclo >= 10) {
+			dados = dados + "|     " + ciclo + "          ";
+		}
 		else {
 			dados = dados + "|      " + ciclo + "          ";
 		}
 		
 		for (Lugar lugar : lugares) {
-			dados = dados + "|  " + lugar.getNumeroDeMarcas() + " ";
+			if(lugar.getNumeroDeMarcas() >= 10) {
+				dados = dados + "| " + lugar.getNumeroDeMarcas() + " ";								
+			}
+			else {
+				dados = dados + "|  " + lugar.getNumeroDeMarcas() + " ";				
+			}
 		}
 		int index = 0;
 		for (Transicao transicao : transicoes) {

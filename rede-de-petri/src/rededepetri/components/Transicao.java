@@ -74,8 +74,18 @@ public class Transicao implements Conectavel{
 		for (Arco arco : arcos_de_entrada) {
 			Lugar entrada = (Lugar) arco.getEntrada();
 			
-			if(entrada.getNumeroDeMarcas() >= arco.getPeso()) {
+			if(arco.isNormal()) {
+				if(entrada.getNumeroDeMarcas() >= arco.getPeso()) {
+					contador_de_validos++;
+				}				
+			}
+			else if(arco.isReset()) {
 				contador_de_validos++;
+			}
+			else if(arco.isInhibitor()) {
+				if(entrada.getNumeroDeMarcas() < arco.getPeso()) {
+					contador_de_validos++;
+				}
 			}
 		}
 		
@@ -92,7 +102,15 @@ public class Transicao implements Conectavel{
 		for (Arco arco : arcos_de_entrada) {
 			Lugar entrada = (Lugar) arco.getEntrada();
 			
-			entrada.subtrairMarcas(arco.getPeso());
+			if(arco.isNormal()) {
+				entrada.subtrairMarcas(arco.getPeso());				
+			}
+			else if(arco.isInhibitor()) {
+				//Do nothing
+			}
+			else if(arco.isReset()) {
+				entrada.setNumeroDeMarcas(0);
+			}
 		}
 		
 		for (Arco arco : arcos_de_saida) {

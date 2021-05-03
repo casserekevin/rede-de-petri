@@ -178,6 +178,9 @@ public class PNMLReader {
 				else if(e.getTagName().equals("peso")) {
 					arco.setPeso(Integer.parseInt(e.getTextContent()));
 				}
+				else if(e.getTagName().equals("tipo")) {
+					arco.setTipo(e.getTextContent());
+				}
 				else if(e.getTagName().equals("sourceId")) {
 					sourceId = Integer.parseInt(e.getTextContent());
 				}
